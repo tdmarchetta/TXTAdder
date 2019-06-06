@@ -2,28 +2,28 @@ TXT Adder -  PowerShell script for Dynu DNS
 Description
 	
 Prerequisites
-?	Certify The Web 4.1.6.0 or Higher
-?	PowerShell 3.0 or Higher
+Certify The Web 4.1.6.0 or Higher
+PowerShell 3.0 or Higher
 
 Installation
-?	Open PowerShellAPIDynu Folder 
-?	Right click on "Setup.ps1"
-?	Click on "Run with PowerShell"
-?	Enter the Dynu API Key when prompted
-?	Open "Certify the Web"
-?	Click on "New Certificate"
-?	Delete "New managed Certificate" and enter your domain i.e. "test.dynu.net"
-?	In Certificate Domains
-?	Click on "Select Website (optional):" Default Web Site or the correct IIS Server
-?	Below is "Add domains to certificate:" enter your domain i.e. "test.dynu.net"
-?	Go to "Authorization"
-?	In "Domain Match" enter your domain i.e. "test.dynu.net"
-?	On "Challenge Type:" change to "dns-01"
-?	On "DNS Update Method:" change to "(Use Custom Script)"
-?	Create Script Path: "C:\TXTAdder\CTW_TXT_Add.bat"
-?	Delete Script Path: "C:\TXTAdder\CTW_TXT_Delete.bat"
-?	Click "Save"
-?	Click "Request Certificate"
+Open PowerShellAPIDynu Folder 
+Right click on "Setup.ps1"
+Click on "Run with PowerShell"
+Enter the Dynu API Key when prompted
+Open "Certify the Web"
+Click on "New Certificate"
+Delete "New managed Certificate" and enter your domain i.e. "test.dynu.net"
+In Certificate Domains
+Click on "Select Website (optional):" Default Web Site or the correct IIS Server
+Below is "Add domains to certificate:" enter your domain i.e. "test.dynu.net"
+Go to "Authorization"
+In "Domain Match" enter your domain i.e. "test.dynu.net"
+On "Challenge Type:" change to "dns-01"
+On "DNS Update Method:" change to "(Use Custom Script)"
+Create Script Path: "C:\TXTAdder\CTW_TXT_Add.bat"
+Delete Script Path: "C:\TXTAdder\CTW_TXT_Delete.bat"
+Click "Save"
+Click "Request Certificate"
 
 License - MIT License
 
