@@ -13,3 +13,7 @@ Copy-Item -Path "$currentlocation\CTW_TXT_Delete.ps1" -Destination 'C:\TXTAdder\
 ###### Gets the API Key from the User.
 $getAPIKey = Read-Host -Prompt 'Dynu API Key, Please'
 $getAPIKey | Add-Content -Path "C:\TXTAdder\DynuAPIKey.txt"
+
+###### PowerShell scripts are not signed...
+Set-ExecutionPolicy Bypass
+dir C:\TXTAdder\ | Unblock-File
