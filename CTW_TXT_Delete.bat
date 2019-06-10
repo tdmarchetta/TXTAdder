@@ -1,4 +1,3 @@
-:: A batch file for https://certifytheweb.com/ > Challenge Type "dns-01" > Create Scipt Path: Put in the correct path to this file.
 set zone=%1
 set id=%2
 set value=%3
