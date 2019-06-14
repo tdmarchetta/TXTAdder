@@ -15,5 +15,7 @@ $getAPIKey = Read-Host -Prompt 'Dynu API Key, Please'
 $getAPIKey | Add-Content -Path "C:\TXTAdder\DynuAPIKey.txt"
 
 ###### These PowerShell scripts are not signed...
-Set-ExecutionPolicy Bypass
+Set-ExecutionPolicy Bypass -Scope Process -Force
+
+# Unblock all files in TXTAdder
 dir C:\TXTAdder\ | Unblock-File
