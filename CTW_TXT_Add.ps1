@@ -1,5 +1,5 @@
 ﻿# PowerShell To Adding TXT record with Certify the Web
-# Version 1.0.1
+# Version 1.0.2
 # Author: Taylor D. Marchetta
 # Huge thanks to James Crissman and Kyle Grey.
 
@@ -12,6 +12,9 @@ param (
 
 # Check for 'C:\TXTAdder\DynuAPIKey.txt' file.
 if (Test-Path C:\TXTAdder\DynuAPIKey.txt) {
+
+# Removes "IX HashValue" in wildcards.
+$zone = $zone -replace "'\*.',"
 
 # Gets the API Key from the file "DynuAPIKey.txt".
 $APIKey = Get-Content -Path 'C:\TXTAdder\DynuAPIKey.txt'
