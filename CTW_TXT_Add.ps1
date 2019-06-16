@@ -1,25 +1,28 @@
-﻿###### PowerShell To Adding TXT record with Certify the Web
-###### Version 1.0.0
-###### Author: Taylor D. Marchetta
-###### Huge thanks to James Crissman
+﻿# PowerShell To Adding TXT record with Certify the Web
+# Version 1.0.1
+# Author: Taylor D. Marchetta
+# Huge thanks to James Crissman and Kyle Grey.
 
-###### String(s) from the BAT file.
+# String(s) from the BAT file.
 param (
     [string]$zone,  #Domain Name
     [string]$id,    #Let's Encrypt nodeName - _acme-challenge.yourdomain.com
     [string]$value  #HashValue for Let's Encrypt
     )
 
-###### Gets the API Key from the file "DynuAPIKey.txt".
+# Check for 'C:\TXTAdder\DynuAPIKey.txt' file.
+if (Test-Path C:\TXTAdder\DynuAPIKey.txt) {
+
+# Gets the API Key from the file "DynuAPIKey.txt".
 $APIKey = Get-Content -Path 'C:\TXTAdder\DynuAPIKey.txt'
 
-###### GET Request to Dynu.com - This will get the ID of the domain.
+# GET Request to Dynu.com - This will get the ID of the domain.
 $getdomaindata = Invoke-RestMethod -Method GET -Uri ‘https://api.dynu.com/v2/dns/’ -ContentType ‘application/json’ -Headers @{ “Api-Key” = $APIKey }
 
-###### This is looking for the object domain "ID".
+# This is looking for the object domain "ID".
 $domainid = $getdomaindata.domains.Where({ $_.name -eq $zone }).id
 
-###### Json data for Dynu API.
+# Json data for Dynu API.
 $body1 = ConvertTo-Json @{
 
     domainId           = $domainid
@@ -29,7 +32,17 @@ $body1 = ConvertTo-Json @{
     ttl                = "60"
     state              = "true"
     textData           = $value
-}
 
-###### POST TXT record to Dynu Record.
+} # End Json data for Dynu API.
+
+# POST TXT record to Dynu Record.
 Invoke-RestMethod -Method POST -Uri "https://api.dynu.com/v2/dns/$($domainid)/record" -ContentType ‘application/json’ -Headers @{ “Api-Key” = $APIKey } -Body $body1
+
+} # End "if"
+else
+{
+
+Write-Host "API Key file not found. Please re-run or run 'Setup.ps1' as administrator"
+exit
+
+} # End "else"
