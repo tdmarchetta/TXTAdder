@@ -1,4 +1,5 @@
-﻿# PowerShell To Adding TXT record with Certify the Web
+﻿# TXTAdder
+# PowerShell To Adding TXT record with Certify the Web
 # Version 1.0.2
 # Author: Taylor D. Marchetta
 # Huge thanks to James Crissman and Kyle Grey.
@@ -26,7 +27,7 @@ $getdomaindata = Invoke-RestMethod -Method GET -Uri ‘https://api.dynu.com/v2/d
 $domainid = $getdomaindata.domains.Where({ $_.name -eq $zone }).id
 
 # Json data for Dynu API.
-$body1 = ConvertTo-Json @{
+$jsonbody = ConvertTo-Json @{
 
     domainId           = $domainid
     domainName         = $id # _acme-challenge.yourdomain.com
@@ -39,7 +40,7 @@ $body1 = ConvertTo-Json @{
 } # End Json data for Dynu API.
 
 # POST TXT record to Dynu Record.
-Invoke-RestMethod -Method POST -Uri "https://api.dynu.com/v2/dns/$($domainid)/record" -ContentType ‘application/json’ -Headers @{ “Api-Key” = $APIKey } -Body $body1
+Invoke-RestMethod -Method POST -Uri "https://api.dynu.com/v2/dns/$($domainid)/record" -ContentType ‘application/json’ -Headers @{ “Api-Key” = $APIKey } -Body $jsonbody
 
 } # End "if"
 else
