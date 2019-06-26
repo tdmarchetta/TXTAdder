@@ -9,8 +9,9 @@ Copy-Item -Path "$currentlocation\CTW_TXT_Add.bat" -Destination 'C:\TXTAdder\'
 Copy-Item -Path "$currentlocation\CTW_TXT_Add.ps1" -Destination 'C:\TXTAdder\'
 Copy-Item -Path "$currentlocation\CTW_TXT_Delete.bat" -Destination 'C:\TXTAdder\'
 Copy-Item -Path "$currentlocation\CTW_TXT_Delete.ps1" -Destination 'C:\TXTAdder\'
+Copy-Item -Path "$currentlocation\RDGateway_Update.ps1" -Destination 'C:\TXTAdder\'
 
-# Gets the API Key from the User.
+# $getAPIKey | Add-Content -Path 
 $getAPIKey = Read-Host -Prompt 'Dynu API Key, Please'
 $getAPIKey | Add-Content -Path "C:\TXTAdder\DynuAPIKey.txt"
 
