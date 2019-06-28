@@ -1,5 +1,5 @@
 # PowerShell to adding SSL Cert and Restart Service.
-# Version 1.0.1
+# Version 1.0.0
 # Author: Taylor D. Marchetta
 
 param (
