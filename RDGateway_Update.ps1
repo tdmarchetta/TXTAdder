@@ -2,10 +2,7 @@
 # Version 1.0.0
 # Author: Taylor D. Marchetta
 
-param (
-    $result,        # Result for apply cert
-    [string]$zone   # Domain Name
-    )
+param($result)
 
 Import-Module RemoteDesktopServices
 
