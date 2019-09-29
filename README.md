@@ -1,4 +1,4 @@
-TXT Adder -  PowerShell script for Dynu DNS
+TXTAdder -  PowerShell script for Dynu DNS
 
 Prerequisites
 
@@ -29,7 +29,7 @@ PowerShell Installation file(s)
 
 	Below is "Add domains to certificate:" enter your domain i.e. "test.dynu.net"
 
-	Go In "Domain Match" enter your domain i.e. "test.dynu.net"
+	Go in "Domain Match" enter your domain i.e. "test.dynu.net"
 
 	On "Challenge Type:" change to "dns-01"
 
