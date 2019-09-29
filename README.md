@@ -2,8 +2,8 @@ TXT Adder -  PowerShell script for Dynu DNS
 Description
 	
 Prerequisites
-Certify The Web 4.1.6.0 or Higher
-PowerShell 3.0 or Higher
+	Certify The Web 4.1.6.0 or Higher
+	PowerShell 3.0 or Higher
 
 Installation
 Open PowerShellAPIDynu Folder 
