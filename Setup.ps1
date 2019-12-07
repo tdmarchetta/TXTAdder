@@ -2,7 +2,7 @@
 # Author: Taylor D. Marchetta
 
 $currentlocation = Get-Location
-New-Item -Path "C:\" -Name "TXTAdder" -ItemType "directory"
+New-Item -Path "C:\" -Name "TXTAdder" -ItemType Directory
 
 # Copy file(s) from the location where "Setup.ps1" is at.
 Copy-Item -Path "$currentlocation\CTW_TXT_Add.bat" -Destination 'C:\TXTAdder\'
@@ -19,4 +19,4 @@ $getAPIKey | Add-Content -Path "C:\TXTAdder\DynuAPIKey.txt"
 Set-ExecutionPolicy Bypass
 
 # Unblock all files in TXTAdder
-Get-ChildItem C:\TXTAdder\ | Unblock-File
+Get-ChildItem 'C:\TXTAdder\' | Unblock-File
