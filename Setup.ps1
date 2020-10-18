@@ -1,12 +1,12 @@
 ﻿# PowerShell To Setting up Scripts to talk to Certify The Web & Dynu.
-# Version 1.0.4
+# Version 1.0.5
 # Author: Taylor D. Marchetta
 
 # Variables
 $currentlocation = Get-Location
 $TXTAdder = "C:\TXTAdder\"
 
-# Check for 'C:\crsadmin' folder.
+# Check for 'C:\TXTAdder' folder.
 # '.trim' will remove leading and trailing spaces and leading and trailing line breaks
 if (!(test-path $TXTAdder.trim())) {
 
@@ -17,7 +17,7 @@ if (!(test-path $TXTAdder.trim())) {
 # Copy file(s) from the location where "Setup.ps1" is at.
 Copy-Item -Path "$currentlocation\CTW_*.*" -Destination '$TXTAdder' -Recurse
 
-# $getAPIKey | Add-Content -Path 
+# $getAPIKey | Add-Content -Path - PowerShell will ask for the Dynu API Key.
 $getAPIKey = Read-Host -Prompt 'Dynu API Key, Please'
 $getAPIKey | Add-Content -Path "$TXTAdder\DynuAPIKey.txt"
 
