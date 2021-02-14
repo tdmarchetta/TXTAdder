@@ -15,7 +15,7 @@ if (!(test-path $TXTAdder.trim())) {
 }
 
 # Copy file(s) from the location where "Setup.ps1" is at.
-Copy-Item -Path "$currentlocation\CTW_*.*" -Destination '$TXTAdder' -Recurse
+Copy-Item -Path "$currentlocation\CTW_*" -Destination "$TXTAdder" -Recurse -Force
 
 # $getAPIKey | Add-Content -Path - PowerShell will ask for the Dynu API Key.
 $getAPIKey = Read-Host -Prompt 'Dynu API Key, Please'
