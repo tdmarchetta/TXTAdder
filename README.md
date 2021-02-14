@@ -3,7 +3,7 @@ TXTAdder -  PowerShell script for Dynu DNS
 Prerequisites
 
 	Download and install Certify The Web 4.1.6.0 or Higher
-	PowerShell 3.0 or Higher
+	PowerShell 5.1 or Higher
 	PowerShell files from TXTAdder
 	Dynu API Key
 	
