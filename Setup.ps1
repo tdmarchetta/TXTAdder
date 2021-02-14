@@ -1,5 +1,5 @@
 ﻿# PowerShell To Setting up Scripts to talk to Certify The Web & Dynu.
-# Version 1.0.5
+# Version 1.0.6
 # Author: Taylor D. Marchetta
 
 # Variables
@@ -10,7 +10,7 @@ $TXTAdder = "C:\TXTAdder\"
 # '.trim' will remove leading and trailing spaces and leading and trailing line breaks
 if (!(test-path $TXTAdder.trim())) {
 
-    # Makes new folder for crsadmin and/or TXTAdder: C:\crsadmin\TXTAdder
+    # Makes new folder for TXTAdder: C:\TXTAdder
     New-Item -Path "$TXTAdder" -ItemType Directory
 }
 

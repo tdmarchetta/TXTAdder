@@ -1,7 +1,6 @@
 ﻿# PowerShell to adding TXT record with Certify The Web.
-# Version 1.0.1
+# Version 1.0.2
 # Author: Taylor D. Marchetta
-# Huge thanks to James Crissman
 
 # String(s) from the BAT file.
 param (
