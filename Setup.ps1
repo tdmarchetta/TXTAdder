@@ -1,5 +1,5 @@
 ﻿# PowerShell To Setting up Scripts to talk to Certify The Web & Dynu.
-# Version 1.0.6
+# Version 1.0.7
 # Author: Taylor D. Marchetta
 
 # Variables
@@ -19,10 +19,14 @@ Copy-Item -Path "$currentlocation\CTW_*" -Destination "$TXTAdder" -Recurse -Forc
 
 # $getAPIKey | Add-Content -Path - PowerShell will ask for the Dynu API Key.
 $getAPIKey = Read-Host -Prompt 'Dynu API Key, Please'
-$getAPIKey | Add-Content -Path "$TXTAdder\DynuAPIKey.txt"
+
+$secureString = $getAPIKey | ConvertTo-SecureString -AsPlainText -Force
+
+# Get content of the string # Save Content to file
+$secureString = Convert-FromSecureString | Set-Content -Path "$TXTAdder\DynuAPIKey.txt"
 
 # These PowerShell scripts are not signed...
 Set-ExecutionPolicy Bypass
 
 # Unblock all files in TXTAdder
-Get-ChildItem 'C:\TXTAdder\' | Unblock-File
+Get-ChildItem $TXTAdder | Unblock-File

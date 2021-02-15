@@ -1,6 +1,6 @@
 ﻿# TXTAdder
 # PowerShell To Adding TXT record with Certify the Web
-# Version 1.0.4
+# Version 1.0.5
 # Author: Taylor D. Marchetta
 # Huge thanks to Kyle Grey.
 
@@ -10,7 +10,10 @@ param (
     [string]$id,    #Let's Encrypt nodeName - _acme-challenge.yourdomain.com
     [string]$value  #HashValue from Let's Encrypt
     )
-    
+
+# Variables
+[string]$TXTAdder = "C:\TXTAdder\"
+
 # Force the use of TLS 1.2    
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
@@ -21,10 +24,12 @@ if (Test-Path C:\TXTAdder\DynuAPIKey.txt) {
     $zone = $zone -replace "'\*.',"
 
     # Gets the API Key from the file "DynuAPIKey.txt".
-    $APIKey = Get-Content -Path 'C:\TXTAdder\DynuAPIKey.txt'
+    #$APIKey = Get-Content -Path 'C:\TXTAdder\DynuAPIKey.txt' (Old Way Pain Text)
+    [SecureString]$APIKey = Get-Content  -Path "$TXTAdder\DynuAPIKey.txt" | ConvertTo-SecureString -AsPlainText -Force
+    # [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR((($APIKey)))) (See output)
 
     # GET Request to Dynu.com - This will get the ID of the domain.
-    $getdomaindata = Invoke-RestMethod -Method GET -Uri ‘https://api.dynu.com/v2/dns/’ -ContentType ‘application/json’ -Headers @{ “Api-Key” = $APIKey }
+    $getdomaindata = Invoke-RestMethod -Method GET -Uri ‘https://api.dynu.com/v2/dns/’ -ContentType ‘application/json’ -Headers @{ “Api-Key” = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($APIKey)) }
 
     # This is looking for the object domain "ID".
     $domainid = $getdomaindata.domains.Where({ $_.name -eq $zone }).id
