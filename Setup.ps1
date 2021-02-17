@@ -18,12 +18,8 @@ if (!(test-path $TXTAdder.trim())) {
 Copy-Item -Path "$currentlocation\CTW_*" -Destination "$TXTAdder" -Recurse -Force
 
 # $getAPIKey | Add-Content -Path - PowerShell will ask for the Dynu API Key.
-$getAPIKey = Read-Host -Prompt 'Dynu API Key, Please'
 
-$secureString = $getAPIKey | ConvertTo-SecureString -AsPlainText -Force
-
-# Get content of the string # Save Content to file
-$secureString = Convert-FromSecureString | Set-Content -Path "$TXTAdder\DynuAPIKey.txt"
+Read-Host -Prompt 'Dynu API Key, Please' |  ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString |  Set-Content -Path "$TXTAdder\DynuAPIKey.txt"
 
 # These PowerShell scripts are not signed...
 Set-ExecutionPolicy Bypass

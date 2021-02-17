@@ -24,12 +24,14 @@ if (Test-Path C:\TXTAdder\DynuAPIKey.txt) {
     $zone = $zone -replace "'\*.',"
 
     # Gets the API Key from the file "DynuAPIKey.txt".
-    #$APIKey = Get-Content -Path 'C:\TXTAdder\DynuAPIKey.txt' (Old Way Pain Text)
-    [SecureString]$APIKey = Get-Content  -Path "$TXTAdder\DynuAPIKey.txt" | ConvertTo-SecureString -AsPlainText -Force
-    # [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR((($APIKey)))) (See output)
+    $secretStuff = Get-Content  -Path "$TXTAdder\DynuAPIKey.txt" | ConvertTo-SecureString
+
+    $APIKey = "Xe64Ue5cfcYd5c2defXd47W7dg4c3b3c"
+    
+    #[Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR((($secretStuff))))
 
     # GET Request to Dynu.com - This will get the ID of the domain.
-    $getdomaindata = Invoke-RestMethod -Method GET -Uri ‘https://api.dynu.com/v2/dns/’ -ContentType ‘application/json’ -Headers @{ “Api-Key” = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($APIKey)) }
+    $getdomaindata = Invoke-RestMethod -Method GET -Uri ‘https://api.dynu.com/v2/dns/’ -ContentType ‘application/json’ -Headers @{ “Api-Key” = $APIKey }
 
     # This is looking for the object domain "ID".
     $domainid = $getdomaindata.domains.Where({ $_.name -eq $zone }).id

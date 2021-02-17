@@ -1,0 +1,1 @@
+psexec -s powershell.exe -file */Setup.ps1
