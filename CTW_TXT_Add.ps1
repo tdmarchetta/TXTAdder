@@ -12,7 +12,7 @@ param (
     )
 
 # Variables
-[string]$TXTAdder = "C:\TXTAdder\"
+$TXTAdder = "C:\TXTAdder\"
 
 # Force the use of TLS 1.2    
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -24,22 +24,20 @@ if (Test-Path C:\TXTAdder\DynuAPIKey.txt) {
     $zone = $zone -replace "'\*.',"
 
     # Gets the API Key from the file "DynuAPIKey.txt".
-    $secretStuff = Get-Content  -Path "$TXTAdder\DynuAPIKey.txt" | ConvertTo-SecureString
+    $memSecurestring = Get-Content  -Path "$TXTAdder\DynuAPIKey.txt" | ConvertTo-SecureString
 
-    $APIKey = "Xe64Ue5cfcYd5c2defXd47W7dg4c3b3c"
-    
-    #[Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR((($secretStuff))))
+    $cleartextAPIKey = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR((($memSecurestring))))
 
     # GET Request to Dynu.com - This will get the ID of the domain.
-    $getdomaindata = Invoke-RestMethod -Method GET -Uri ‘https://api.dynu.com/v2/dns/’ -ContentType ‘application/json’ -Headers @{ “Api-Key” = $APIKey }
+    $getDomaindata = Invoke-RestMethod -Method GET -Uri ‘https://api.dynu.com/v2/dns/’ -ContentType ‘application/json’ -Headers @{ “Api-Key” = $cleartextAPIKey }
 
     # This is looking for the object domain "ID".
-    $domainid = $getdomaindata.domains.Where({ $_.name -eq $zone }).id
+    $domainID = $getDomaindata.domains.Where({ $_.name -eq $zone }).id
 
     # Json data for Dynu API.
     $jsonbody = ConvertTo-Json @{
 
-        domainId           = $domainid
+        domainId           = $domainID
         domainName         = $id # _acme-challenge.yourdomain.com
         nodeName           = "_acme-challenge"
         recordType         = "TXT"
@@ -50,7 +48,7 @@ if (Test-Path C:\TXTAdder\DynuAPIKey.txt) {
 }
 
     # POST TXT record to Dynu Record.
-    Invoke-RestMethod -Method POST -Uri "https://api.dynu.com/v2/dns/$($domainid)/record" -ContentType ‘application/json’ -Headers @{ “Api-Key” = $APIKey } -Body $jsonbody
+    Invoke-RestMethod -Method POST -Uri "https://api.dynu.com/v2/dns/$($domainID)/record" -ContentType ‘application/json’ -Headers @{ “Api-Key” = $APIKey } -Body $jsonbody
 
 }
 else
