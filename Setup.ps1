@@ -12,7 +12,7 @@ Import-Module CredentialManager
 
 #Get API key and Stored in Credential Manager
 $DynuAPIKey = Read-Host -Prompt "Enter the API key"
-New-StoredCredential -Target DynuAPIKey -Persist LOCAL_MACHINE -Comment 'Dynu API Key for Certify the Web.' -Type Generic -Credentials $DynuAPIKey
+New-StoredCredential -Target DynuAPIKey -Persist LOCALMACHINE -Comment 'Dynu API Key for Certify the Web.' -Type Generic -UserName '' -Password $DynuAPIKey
 
 # Check for 'C:\TXTAdder' folder.
 # '.trim' will remove leading and trailing spaces and leading and trailing line breaks
