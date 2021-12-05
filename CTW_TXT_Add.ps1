@@ -21,7 +21,7 @@ param (
         $zone = $zone -replace "'\*.',"
 
         # Gets the API Key from the Windows Credentail Manager.
-        $APIKey = Get-StoredCredential -Target DynuAPIKey
+        $APIKey = Get-StoredCredential -AsCredentialObject -Target 'DynuAPIKey' | Select-Object -ExpandProperty Password
 
         # GET Request to Dynu.com - This will get the ID of the domain.
         $getdomaindata = Invoke-RestMethod -Method GET -Uri ‘https://api.dynu.com/v2/dns/’ -ContentType ‘application/json’ -Headers @{ “Api-Key” = $APIKey }
