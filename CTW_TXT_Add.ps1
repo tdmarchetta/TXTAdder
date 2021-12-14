@@ -18,7 +18,7 @@ param (
     if (Test-Path C:\TXTAdder) {
 
         # Removes "IX HashValue" in wildcards.
-        $zone = $zone -replace "'\*.',"
+        $zoneReplace = $zone.Replace('*.','')
 
         # Gets the API Key from the Windows Credentail Manager.
         $APIKey = Get-StoredCredential -AsCredentialObject -Target 'DynuAPIKey' | Select-Object -ExpandProperty Password
@@ -27,7 +27,7 @@ param (
         $getdomaindata = Invoke-RestMethod -Method GET -Uri ‘https://api.dynu.com/v2/dns/’ -ContentType ‘application/json’ -Headers @{ “Api-Key” = $APIKey }
 
         # This is looking for the object domain "ID".
-        $domainid = $getdomaindata.domains.Where({ $_.name -eq $zone }).id
+        $domainid = $getdomaindata.domains.Where({ $_.name -match $zoneReplace }).id
 
         # Json data for Dynu API.
         $jsonbody = ConvertTo-Json @{
@@ -39,8 +39,7 @@ param (
             ttl                = "60"
             state              = "true"
             textData           = $value #HashValue from Let's Encrypt
-
-    }
+        }
 
         # POST TXT record to Dynu Record.
         Invoke-RestMethod -Method POST -Uri "https://api.dynu.com/v2/dns/$($domainid)/record" -ContentType ‘application/json’ -Headers @{ “Api-Key” = $APIKey } -Body $jsonbody
